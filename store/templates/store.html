@@ -1,0 +1,70 @@
+<style>
+    .item-box {
+        /* width: 100%; */
+        display: inline-flex;
+    }
+    .div_info {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .div_info a {
+        text-decoration: none;
+    }
+    .store-box {
+        display:grid;
+        grid-template-rows: repeat(10, 1fr);
+        row-gap: 10px;
+    }
+    .item-box:nth-child(1){grid-row: 1 / 2;}
+    .item-box:nth-child(2){grid-row: 2 / 3;}
+    .item-box:nth-child(3){grid-row: 3 / 4;}
+    .item-box:nth-child(4){grid-row: 4 / 5;}
+    .item-box:nth-child(5){grid-row: 5 / 6;}
+    .item-box:nth-child(6){grid-row: 6 / 7;}
+    .item-box:nth-child(7){grid-row: 7 / 8;}
+    .item-box:nth-child(8){grid-row: 8 / 9;}
+    .item-box:nth-child(9){grid-row: 9 / 10;}
+    .item-box:nth-child(10){grid-row: 10 / 11;}
+
+    .direction {
+        text-align: center;
+    }
+    .direction a {
+        text-decoration: none;
+    }
+</style>
+
+<div class="search_form">
+    <form action="{%url 'store:index' %}" method="GET">
+        <input type="search" name="keyword" placeholder="검색어를 입력하세요" id="keyword">
+        <button type="submit">검색</button>
+    </form>
+</div>
+
+<div class="store-box">
+    {% for book in bookList %}
+    <div class="item-box">
+        {%if book.image %}
+        <div class="div_img"><img src="{{book.image}}"></div>
+        {%endif%}
+        <div class="div_info">
+            <a href="{%url 'store:detail' book.id %}">{{book.title}}</a>
+            <p>{{book.author}} | {{book.publisher}} | {{book.pubdate}}</p>
+            <p>{{book.price}} 원</p>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+
+
+<div class="direction">
+    {% if page != '1' %}
+    <a href="?page=1&keyword={{keyword}}" class="a-button">처음</a>
+    <a href="?page={{page|add:'-1'}}&keyword={{keyword}}">◀</a>
+    {% endif %}
+
+    <!-- 현재 페이지 -->
+    <span>{{page}}</span>
+    
+    <a href="?page={{page|add:'1'}}&keyword={{keyword}}">▶</a>
+</div>

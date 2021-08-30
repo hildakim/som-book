@@ -5,5 +5,6 @@ from .views import *
 app_name = "store"
 
 urlpatterns = [
-    
+    path('', store, name="index"),
+    path('detail/<int:id>', detail, name="detail"),
 ]

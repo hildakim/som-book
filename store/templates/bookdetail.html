@@ -1,0 +1,36 @@
+<style>
+    .item-box {
+        display: grid;
+        gap: 5px;
+        grid-template-columns: 100px 1fr 1fr;
+    }
+    .div_img { grid-column: 1 / 2;}
+    .div_info { grid-column: 2 / 4;}
+    .btn_cart {
+        background-color: dodgerblue;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+    }
+    .div_info a {
+        text-decoration: none;
+    }
+</style>
+
+<div class="item-box">
+    {%if book.image %}
+    <div class="div_img"><img src="{{book.image}}"></div>
+    {%endif%}
+    <div class="div_info">
+        <a href="{%url 'store:detail' book.id %}">{{book.title}}</a>
+        <hr>
+        <p>ISBN | {{book.isbn}}</p>
+        <p>{{book.author}} | {{book.publisher}} | {{book.pubdate}}</p>
+        <p>판매가 {{book.price}} 원</p>
+        <p>{{book.description}}</p>
+        <br>
+        <a href="" class="btn_cart">카트에 넣기</a>
+    </div>
+</div>
+
+<a href="{%url 'store:index' %}">메인 페이지로</a>
