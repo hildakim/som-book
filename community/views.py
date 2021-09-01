@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 from .models import Community
 from .forms import CommunityForm
+from django.views.generic import ListView, DetailView,TemplateView
 
 # Create your views here.
 
@@ -26,6 +27,10 @@ def new(request):
             community.date = timezone.now() 
             community.author = request.user
             community.save()
+            tags = request.POST.get('tags', '').split(',') 
+            for tag in tags:
+                tag = tag.strip()
+                community.tags.add(tag)
             return redirect('community:community')
     else:
         community_form = CommunityForm()
@@ -42,6 +47,10 @@ def edit(request, id):
             community = community_form.save(commit=False)
             community.date = timezone.now() 
             community.save()
+            tags = request.POST.get('tags', '').split(',') 
+            for tag in tags:
+                tag = tag.strip()
+                community.tags.add(tag)
         return redirect('community:community_detail', community.id)
 
 def delete(request, id):
@@ -49,3 +58,20 @@ def delete(request, id):
     if request.user == erase_community.author:
         erase_community.delete()
     return redirect('community:community')
+
+# ArchiveView
+
+class TagCloudTV(TemplateView):
+    template_name = 'taggit_cloud.html'
+
+class TaggedObjectLV(ListView):
+    template_name = 'taggit_post_list.html'
+    model = Community
+
+    def get_queryset(self):
+        return Community.objects.filter(tags__name=self.kwargs.get('tag'))
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tagname'] = self.kwargs['tag']
+        return context
