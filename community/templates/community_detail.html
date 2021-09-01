@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<body>
+
+    <h1>{{data.title}}</h1>
+    
+    <div>
+        작성자:{{data.author}}
+        <br>
+        날짜:{{data.date}}
+    </div>
+    
+    <hr>
+    
+    {% if data.image %}
+        <p><img src="{{data.image.url}}" height="500"></p>
+    {% endif %}
+    
+    <p>{{data.contents | linebreaks}}</p>
+
+    {% if request.user == data.author %}
+    <div>
+        <a href="{% url 'community:community_edit' data.id %}"><span style="color:rgb(119, 119, 119);">▶Edit </span></a>
+        <a href="{% url 'community:community_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a> 
+    </div>
+    {% endif %}
+
+{% endblock %}
