@@ -2,7 +2,7 @@
 {% block content %}
 
 <body>
-
+<div class="container">
     <h1>{{data.title}}</h1>
     
     <div>
@@ -19,11 +19,25 @@
     
     <p>{{data.contents | linebreaks}}</p>
 
+    {% comment %} 밑에는 태그 관련 코드 {% endcomment %}
+    <br>
+    <div>
+        <b>관련 태그</b> <i class="fas fa-tag"></i>
+        {% load taggit_templatetags2_tags %} <!--taggit_templatetags2_tags 모듈을 가져온다-->
+        {% get_tags_for_object data as "tags" %} <!-- ** -->
+        {% for tag in tags %}
+        <a href="{% url 'community:tagged_object_list' tag.name %}">{{tag.name}}</a>
+        {% endfor %}
+        &emsp;
+        <a href="{% url 'community:tag_cloud' %}"><span class="btn btn-info btn-sm">TagCloud</span></a>
+    </div>
+    {% comment %} 태그 관련 코드 끝 {% endcomment %}
+    <br>
     {% if request.user == data.author %}
     <div>
         <a href="{% url 'community:community_edit' data.id %}"><span style="color:rgb(119, 119, 119);">▶Edit </span></a>
         <a href="{% url 'community:community_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a> 
     </div>
     {% endif %}
-
+</div>
 {% endblock %}

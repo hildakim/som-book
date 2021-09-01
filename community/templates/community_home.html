@@ -6,20 +6,27 @@
 
     <hr>
     
-    <div class="container">
-        <table class="table">
-            <tr>
-                <td>제목</td>
-                <td>작성자</td>
-                <td>작성일</td>
-            </tr>
-            {% for content in posts %}
-                <td>{{content.title}}</td>
-                <td>{{content.author}}</td>
-                <td>{{content.date | date:"Y-m-d"}}</td>
-                <td><a href="{% url 'community:community_detail' content.id%}">자세히보기</a></td>
-            {% endfor %}
-    </div>
+<div class="container">   
+    <table class="table">
+        <tr>
+            <td>제목</td>
+            <td>작성자</td>
+            <td>작성일</td>
+            <td>더보기</td>
+        </tr>
+
+        {% for content in posts %}
+        <tr>
+            <td>{{content.title}}</td>
+            <td>{{content.author}}</td>
+            <td>{{content.date | date:"Y-m-d"}}</td>
+            <td><a href="{% url 'community:community_detail' content.id%}">자세히보기</a></td>
+        </tr>
+        {% empty %} 
+            <h3>커뮤니티 글이 존재하지 않습니다. 새로운 글을 작성해주세요.</h3>
+        {% endfor %}
+    </table>
+</div>   
     
     <div class="footer">
         {% if posts.has_previous %}

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
@@ -12,9 +13,22 @@ class Community(models.Model):
     contents = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to = "community/", blank = True, null = True)
+    tags = TaggableManager(blank=True)
+
+    class Meta:
+        verbose_name = 'community' #테이블 단수 별칭
+        verbose_name_plural = 'communities' #테이블 복수 별칭
+        db_table = 'community_communities' #디폴트는 앱명_모델명(blog_post)
+        ordering = ('-date',) #출력 시 modify_dt를 기준으로 내림차순 정렬
     
     def __str__(self):
         return self.title
 
     def summary(self):
         return self.contents[:100]
+
+    def get_previous(self):
+        return self.get_previous_by_date()#장고의 내장함수, date()를 기준으로 최신포스트를 반환
+
+    def get_next(self):
+        return self.get_next_by_date()
