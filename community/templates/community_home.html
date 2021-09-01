@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>SOM-BOOK</h1>
+
+    <hr>
+    
+    <div class="container">
+        <table class="table">
+            <tr>
+                <td>제목</td>
+                <td>작성자</td>
+                <td>작성일</td>
+            </tr>
+            {% for content in posts %}
+                <td>{{content.title}}</td>
+                <td>{{content.author}}</td>
+                <td>{{content.date | date:"Y-m-d"}}</td>
+                <td><a href="{% url 'community:community_detail' content.id%}">자세히보기</a></td>
+            {% endfor %}
+    </div>
+    
+    <div class="footer">
+        {% if posts.has_previous %}
+            <a href="?page=1">1</a>
+            <a href="?page={{posts.previous_page_number}}">◀</a>
+        {% endif %}
+        <span>{{posts.number}}</span>
+        <span>of</span>
+        <span>{{posts.paginator.num_pages}}</span>
+        {%if posts.has_next%}
+            <a href="?page={{posts.next_page_number}}">▶</a>
+            <a href="?page={{posts.paginator.num_pages}}">{{posts.paginator.num_pages}}</a>
+        {% endif %}
+    </div>
+
+{% endblock %}

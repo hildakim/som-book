@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<body>
+    
+    {% if user.is_authenticated %}
+    <h1>글 작성</h1>
+
+    <form action="{% url 'community:community_new' %}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        <table>
+            {{form | crispy}}
+        </table>
+        <button type="submit"> 확인 </button>
+    </form>
+
+    {% else %}
+    <h4>로그인 후 이용하세요<br>
+    <a href="{% url '' %}">로그인</a>
+    {% comment %} 로그인 url 추가해야 됨 {% endcomment %}
+    </h4>
+    
+    {% endif %}
+
+</body>
+
+{% endblock %}
