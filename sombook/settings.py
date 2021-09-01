@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -51,12 +52,19 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
-    'taggit.apps.TaggitAppconfig',
+    'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2',
 ]
 
 TAGGIT_CASE_INSENSITIVE = True
 TAGGIT_LIMIT = 50
+
+ASGI_APPLICATION = 'sombook.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

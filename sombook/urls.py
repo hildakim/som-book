@@ -18,8 +18,10 @@ from django.urls import path
 from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
+from community.views import community
 
 urlpatterns = [
+    path('', community, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('user/', include('user.urls')),
