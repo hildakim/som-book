@@ -1,4 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
 <style>
+    .content-container {
+        display: grid;
+        grid-template-areas: "search search search"
+                            "a list b"
+                            "c direction d";
+        row-gap: 15px;
+    }
+    .search_form {
+        grid-area: search; 
+        text-align: center;}
+    #keyword {
+        width: 50%;
+        border: beige solid 1px;
+        background-color: beige;
+    }
     .item-box {
         /* width: 100%; */
         display: inline-flex;
@@ -9,8 +26,10 @@
     }
     .div_info a {
         text-decoration: none;
+        color:rgb(117, 66, 66)
     }
     .store-box {
+        grid-area:list;
         display:grid;
         grid-template-rows: repeat(10, 1fr);
         row-gap: 10px;
@@ -27,9 +46,16 @@
     .item-box:nth-child(10){grid-row: 10 / 11;}
 
     .direction {
+        grid-area:direction;
+        margin: 0 auto;
+        width: fit-content;
         text-align: center;
+        background-color: beige;
+        padding: 3px 20px 3px 20px;
+        border-radius: 10px;
     }
     .direction a {
+        color: black;
         text-decoration: none;
     }
 </style>
@@ -68,3 +94,5 @@
     
     <a href="?page={{page|add:'1'}}&keyword={{keyword}}">▶</a>
 </div>
+
+{% endblock %}

@@ -13,55 +13,94 @@
     integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
     crossorigin="anonymous"></script>
   <style>
+    @font-face {
+      font-family: 'SF_HambakSnow';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff'),
+            url('fonts/SF_HambakSnow.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
     body {
-      text-align: center;
+      font-family: 'SF_HambakSnow';
       background-color: rgb(255, 255, 255);
+      display: grid;
+      grid-template-areas: "header"
+                            "main";
     }
-
-    h1 {
-      font-size: 50px;
-      color: rgb(0, 0, 0);
+    nav { grid-area: header;}
+    .content-container { 
+      grid-area: main;
+      padding: 15px;
     }
-
-    a {
-      color: black;
-    }
-
     nav a {
-    background: rgb(255, 149, 88);
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-    border-radius:5px;
-    padding: 10px;
+      background: beige;
+      color: black;
+      text-decoration: none;
+      display: inline-block;
+      border-radius:5px;
+      padding: 10px;
+      height: fit-content;
     }
+    .menu-item{
+      margin-top: 18px;
+    }
+    .container-menu {
+      text-align: center;
+      margin: 15px;
+      display: grid;
+      grid-template-areas: "store community write title chat login user";
+      gap: 10px;
+    }
+    .store { grid-area: store;}
+    .community {grid-area: community;}
+    .sombook-title { 
+      grid-area: title;
+      font-size: 40px;
+      font-weight: bold;
+      border: 3px solid black;
+      border-radius: 23px;
+    }
+    .write {grid-area: write;}
+    .chat {grid-area: chat;}
+    .logout {grid-area:login;}
+    .login {grid-area: login;}
+    .signup {grid-area: user;}
+    .user {
+      grid-area:user;
+      margin-top: 20px;
+    }
+    
 </style>
 </head>
 
 <body>
   {% load static %}
-  <nav class="navbar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{%url 'home' %}">Home</a>
+  <nav>
+    <div class="container-menu">
+      <a class="menu-item store" href="{%url 'store:index' %}">store</a>
+      <a class="menu-item community" href="{%url 'home' %}">community</a>
+      <span class="navbar-text sombook-title">솜책방</span>
       {% if user.is_authenticated %}
-      <a class="navbar-brand" href="{%url 'community:community_new'%}">Write</a>
-      <a class="navbar-brand" href="{%url 'chat:index' %}">Chat</a>
-      <a class="navbar-brand logout" href="{%url 'user:logout' %}">Logout</a>
-      <span class="navbar-text">
+      <a class="menu-item write" href="{%url 'community:community_new'%}">Write</a>
+      <a class="menu-item chat" href="{%url 'chat:index' %}">Chat</a>
+      <a class="menu-item logout" href="{%url 'user:logout' %}">Logout</a>
+      <span class="menu-item navbar-text user">
         {{user.username}} 님이 로그인 중
       </span>
       {% endif %}
 
       {% if not user.is_authenticated %}
-      <a class="navbar-brand" href="{%url 'user:login' %}">Login</a>
-      <a class="navbar-brand" href="{%url 'user:signup' %}">Signup </a>
+      <a class="menu-item login" href="{%url 'user:login' %}">Login</a>
+      <a class="menu-item signup" href="{%url 'user:signup' %}">Signup </a>
       {% endif %}
       
     </div>
   </nav>
- 
+
+<div class="content-container">
 {% block content %}
 {% endblock %}
+</div>
 
 </body>
 
