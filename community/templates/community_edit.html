@@ -3,7 +3,7 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-{% if request.user == ticket.author %}
+{% if request.user == community.author %}
     <h1>글 수정</h1>
     <form method="POST" id="update_form" enctype="multipart/form-data">
         {%csrf_token%}
