@@ -23,12 +23,12 @@ def remove(request,book_id):
     book = get_object_or_404(Book, id= book_id)
     cart.remove(book)
     return redirect('cart:detail')
-'''
+
 def remove_all(request):
     cart = Cart(request)
-    cart.remove_all(all)
+    cart.remove_all()
     return redirect('cart:detail')
-'''
+
 def detail(request):
     cart = Cart(request)
     for book in cart :

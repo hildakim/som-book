@@ -8,6 +8,11 @@
         border-radius: 20px;
         width : 70%;
         margin: auto;
+        background-color: beige;
+    }
+    .cartMain h6{
+        text-align: right;
+        margin-right: 5%;
     }
     cartLogo{
         font-size: 80px;
@@ -17,44 +22,105 @@
     }
     .div_img{
         float: left;
-        margin-left: 5%;
+        margin-left: 7%;
     }
     .remove{
         float: left;
-        margin-left: 10%;
+        margin-left: 7%;
         position: relative;
-        top:30px;
+        top:40px;
+    }
+    .cart_info{
+        margin: auto;
+        width: 50%;
+    }
+    th,.totalprice,.price{
+       height: 20px;
+       padding: 10px;
+       margin-top: 10px;
+       border-radius: 20px;
+       background-color: beige;
+    }
+    table,th,tr,td{border: 0px solid black;}
+    .price{width:90px;}
+    .totalprice{
+        background-color: beige;
+    }
+    .item{
+        background-color: white;
+    }
+    a{text-decoration: none;}
+    a:visited{color: black;}
+    .t2{
+        padding-top: 10px;
     }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+   function on(bid) {//alert(bid);
+    $(document).ready(function() {
+        
+        $('#rmBtn'+bid).attr({src: "{%static 'xIcon_v.png'%}"});
+            
+    });}
+    function out(bid) {//alert(bid);
+    $(document).ready(function() {
+        
+        $('#rmBtn'+bid).attr({src: "{%static 'xIcon_.png'%}"});
+            
+    });}
+
+    $(document).ready(function() {
+        
+        $('h6 a').hover(
+            function(){ $('h6 img').attr({src: "{%static 'xIcon_v.png'%}"});},
+            function(){ $('h6 img').attr({src: "{%static 'xIcon_.png'%}"});}
+        )
+            
+    });
+    function deleteM(){
+         var ret = confirm("장바구니를 비우시겠습니까?");
+         return ret;
+    }
+</script><br><br>
 <div class='cartMain'>
     <p><img src="{%static 'cart.png'%}" alt="cart" height="160px"><cartLogo>장바구니</cartLogo></p>
-   
+    <h6><a  href="{% url 'cart:remove_all'%}" onclick="return deleteM()">장바구니 모두 삭제<img  src="{% static 'xIcon_.png' %}" height="20px"></a></h6>
     <hr>
+    <div class="item"><br>
+        
     {% for item in cart %}
     
         {% with book=item.book %}
-        <a href = "{% url 'cart:book_remove' book.id %}"><img class="remove" src="{% static 'xIcon.png' %}"></a>
+        <br>
+        <a href = "{% url 'cart:book_remove' book.id %} " id="{{book.id}}" onmouseover="on(this.id)" onmouseout="out(this.id)"> <img class="remove"  id="rmBtn{{book.id}}"  src="{% static 'xIcon_.png' %}" ></a>
         {%if book.image %}
         <div class="div_img">  <a href ="{{book.get_absolute_url}}"><img src="{{book.image}}"></a></div>
         {%endif%}
-       <a href ="{{book.get_absolute_url}}"> <p>{{book.title}}</p></a>
-            <form action = "{% url 'cart:book_add' book.id %}" method="post">
-                {% csrf_token %}
-                {{item.quantity_form.quantity}}
-                {{item.quantity_form.is_update}}
-                <input type="submit" value ="Update">
-            </form>
 
-            
-            <p>price: $ {{item.price}}</p>
-            <p>total_price : $ {{item.total_price}}</p><hr>
 
+        <table class="cart_info">
+           <tr> <th colspan="2"><a href ="{{book.get_absolute_url}}"> <p>{{book.title}}</p></a></th></tr>
+           <tr><td> </td> </tr>
+            <tr class="t2"><td class="price" > {{item.price}}원</td>
+                  <td>  <form action = "{% url 'cart:book_add' book.id %}" method="post">
+                        {% csrf_token %}
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{item.quantity_form.quantity}}
+                        {{item.quantity_form.is_update}}
+                        <input type="submit" value ="Update">
+                    </form>
+                    </td></tr>
+                    <tr><td>  </td> </tr>
+              <tr ><td colspan="2" class="totalprice">총 : {{item.total_price}}원</td></tr>
+                </table>
+               
         {% endwith %}
-        
+        <br>
+        <hr>
     {%endfor%}
-   
-    <p>Total</p>
-    <p> {{cart.get_book_total}}원</p>
+    </div>
+    <h3>총 주문금액 : {{cart.get_book_total}}원</h3>
 
     <p><a href = '{% url "store:index" %}'>계속 쇼핑하기</a></p>
 </div>
