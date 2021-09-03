@@ -73,10 +73,11 @@
         {%if book.image %}
         <div class="div_img"><img src="{{book.image}}"></div>
         {%endif%}
-        <div class="div_info">
-            <a href="{%url 'store:detail' book.id %}">{{book.title}}</a>
+      <div class="div_info"> <a href ="{{book.get_absolute_url}}">
+            <p>{{book.title}}</p>
             <p>{{book.author}} | {{book.publisher}} | {{book.pubdate}}</p>
             <p>{{book.price}} 원</p>
+        </a>
         </div>
     </div>
     {%endfor%}

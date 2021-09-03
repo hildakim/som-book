@@ -1,0 +1,21 @@
+{% for item in cart %}
+    {% with book=item.book %}
+    <p>{{book.title}}</p>
+        <form action = "{% url 'cart:book_add' book.id %}" method="post">
+            {% csrf_token %}
+            {{item.quantity_form.quantity}}
+            {{item.quantity_form.is_update}}
+            <input type="submit" value ="Update">
+        </form>
+
+        <a href = "{% url 'cart:book_remove' book.id %}"> Remove </a>
+        <p>price: $ {{item.price}}</p>
+        <p>total_price : $ {{item.total_price}}</p><hr>
+
+    {% endwith %}
+{%endfor%}
+
+<p>Total</p>
+<p> {{cart.get_book_total}}원</p>
+
+<p><a href = '{% url "store:index" %}'>Continue shopping</a></p>

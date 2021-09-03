@@ -169,3 +169,4 @@ MEDIA_URL = '/media/'
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
+CART_ID = 'cart_item'

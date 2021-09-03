@@ -6,10 +6,12 @@ import json
 import xml.etree.ElementTree as ET
 from .models import Book
 import datetime
-
+from cart.forms import AddBookForm
+from django.template.defaultfilters import slugify
 # Create your views here.
 def store(request):
     page = request.GET.get('page')
+    
     if page is None:
         page = "1"
 
@@ -21,10 +23,12 @@ def store(request):
     return render(request, 'store.html', {'bookList':bookList, 'keyword':keyword, 'page':page})
 
 
-def detail(request, id):
-    book = Book.objects.get(id = id)
-    return render(request, 'bookdetail.html', {'book':book})
-
+def detail(request, id,book_slug=None):
+    book = get_object_or_404(Book,id=id,slug=book_slug)
+    print(book_slug)
+    print("---------------")
+    add_to_cart = AddBookForm(initial={'quantity':1})
+    return render(request, 'bookdetail.html',{'book':book,'add_to_cart':add_to_cart})
 
 def bookListApi(keyword, page):
     client_id = os.environ.get("client_id")
@@ -58,6 +62,11 @@ def bookListApi(keyword, page):
         for item in items:
             title = item.find('title').text.replace('<b>', "").replace('</b>', "")
             author = item.find('author').text.replace('<b>', "").replace('</b>', "")
+            #slug = slugify(title)
+            slug = item.find('title').text.replace('<b>', "").replace('</b>', "").replace(' ', "-")
+            print(title)
+            print("-------------------")
+            print(slug)
             isbn = item.find('isbn').text
             image = item.find('image').text
             publisher = item.find('publisher').text.replace('<b>', "").replace('</b>', "")
@@ -73,7 +82,7 @@ def bookListApi(keyword, page):
                 book = get_object_or_404(Book,isbn=isbn)
                 bookList.append(book)
             else:
-                book = Book.objects.create(title=title, author=author, isbn=isbn, image=image, publisher=publisher, pubdate=pubdate, price=price, description=description)
+                book = Book.objects.create(title=title, author=author,slug=slug, isbn=isbn, image=image, publisher=publisher, pubdate=pubdate, price=price, description=description)
                 bookList.append(book)
         return bookList
     else:
