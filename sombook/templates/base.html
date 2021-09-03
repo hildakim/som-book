@@ -81,7 +81,7 @@
       <a class="menu-item community" href="{%url 'home' %}">Community</a>
       <span class="navbar-text sombook-title">솜책방</span>
       {% if user.is_authenticated %}
-      <a class="menu-item write" href="{%url 'community:community_new'%}">Write</a>
+      <a class="menu-item write" href="{%url 'cart:detail'%}">Cart</a>
       <a class="menu-item chat" href="{%url 'chat:index' %}">Chat</a>
       <a class="menu-item logout" href="{%url 'user:logout' %}">Logout</a>
       <span class="menu-item navbar-text user">
