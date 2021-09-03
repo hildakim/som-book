@@ -3,8 +3,7 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<body>
-    
+<div class="container">    
     {% if user.is_authenticated %}
     <h1>글 작성</h1>
 
@@ -24,6 +23,6 @@
     
     {% endif %}
 
-</body>
+</div>
 
 {% endblock %}

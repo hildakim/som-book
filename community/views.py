@@ -10,7 +10,7 @@ from django.views.generic import ListView, DetailView,TemplateView
 def community(request):
     contents = Community.objects.all()
     community_list = Community.objects.all().order_by('-id')
-    paginator = Paginator(community_list, 3)
+    paginator = Paginator(community_list, 10)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request, 'community_home.html', {'contents': contents, 'posts':posts})

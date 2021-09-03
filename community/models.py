@@ -25,7 +25,7 @@ class Community(models.Model):
         return self.title
 
     def summary(self):
-        return self.contents[:100]
+        return self.contents[:10]
 
     def get_previous(self):
         return self.get_previous_by_date()#장고의 내장함수, date()를 기준으로 최신포스트를 반환
