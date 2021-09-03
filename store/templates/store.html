@@ -19,6 +19,9 @@
     .item-box {
         /* width: 100%; */
         display: inline-flex;
+        border-radius: 10px;
+        border: 3px solid beige;
+        padding: 5px;
     }
     .div_info {
         padding-left: 10px;
@@ -26,7 +29,7 @@
     }
     .div_info a {
         text-decoration: none;
-        color:rgb(117, 66, 66)
+        color:black;
     }
     .store-box {
         grid-area:list;
@@ -72,7 +75,7 @@
         {%if book.image %}
         <div class="div_img"><img src="{{book.image}}"></div>
         {%endif%}
-      <div class="div_info"> <a href ="{{book.get_absolute_url}}">
+        <div class="div_info"> <a href ="{{book.get_absolute_url}}">
             <p>{{book.title}}</p>
             <p>{{book.author}} | {{book.publisher}} | {{book.pubdate}}</p>
             <p>{{book.price}} 원</p>
