@@ -88,7 +88,10 @@
     <h6><a  href="{% url 'cart:remove_all'%}" onclick="return deleteM()">장바구니 모두 삭제<img  src="{% static 'xIcon_.png' %}" height="20px"></a></h6>
     <hr>
     <div class="item"><br>
-        
+    {% if not cart%}
+    <br><br><br><h1>장바구니가 비었습니다 :)<br><br>
+    새로운 책을 담아주세요!</h1><br><br><br>
+    {%endif%}
     {% for item in cart %}
     
         {% with book=item.book %}
@@ -119,7 +122,7 @@
         <br>
         <hr>
     {%endfor%}
-    </div>
+    </div><br>
     <h3>총 주문금액 : {{cart.get_book_total}}원</h3>
 
     <p><a href = '{% url "store:index" %}'>계속 쇼핑하기</a></p>
