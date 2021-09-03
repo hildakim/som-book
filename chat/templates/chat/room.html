@@ -6,10 +6,35 @@
     <meta charset="utf-8"/>
     <title>Chat Room</title>
 </head>
+<style>
+    body{
+        text-align: center;
+    }
 
+    #chat-log,#chat-message-input{
+        background-color: white;
+        height: 45px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 6px;
+        border: 1px solid black;
+    }
+
+    #chat-log{
+        height: 480px;
+    }
+    #chat-message-submit{
+        width:70px;
+        height:50px;
+        border-top:none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 3px solid black;
+    }
+</style>
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
-    <input id="chat-message-input" type="text" size="100"/><br/>
+    <textarea id="chat-log" cols="100" rows="20" readonly></textarea><br/>
+    <input id="chat-message-input" type="text" size="100"/><br/><br>
     <input id="chat-message-submit" type="button" value="Send"/>
 </body>
 
