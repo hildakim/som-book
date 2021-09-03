@@ -1,25 +1,61 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for item in cart %}
-    {% with book=item.book %}
-    <p>{{book.title}}</p>
-        <form action = "{% url 'cart:book_add' book.id %}" method="post">
-            {% csrf_token %}
-            {{item.quantity_form.quantity}}
-            {{item.quantity_form.is_update}}
-            <input type="submit" value ="Update">
-        </form>
+{% load static %}
+<style>
+    .cartMain{
+        text-align: center;
+        border: 2px solid black;
+        border-radius: 20px;
+        width : 70%;
+        margin: auto;
+    }
+    cartLogo{
+        font-size: 80px;
+        position: relative;
+        top:30px;
+        
+    }
+    .div_img{
+        float: left;
+        margin-left: 5%;
+    }
+    .remove{
+        float: left;
+        margin-left: 10%;
+        position: relative;
+        top:30px;
+    }
+</style>
+<div class='cartMain'>
+    <p><img src="{%static 'cart.png'%}" alt="cart" height="160px"><cartLogo>장바구니</cartLogo></p>
+   
+    <hr>
+    {% for item in cart %}
+    
+        {% with book=item.book %}
+        <a href = "{% url 'cart:book_remove' book.id %}"><img class="remove" src="{% static 'xIcon.png' %}"></a>
+        {%if book.image %}
+        <div class="div_img">  <a href ="{{book.get_absolute_url}}"><img src="{{book.image}}"></a></div>
+        {%endif%}
+       <a href ="{{book.get_absolute_url}}"> <p>{{book.title}}</p></a>
+            <form action = "{% url 'cart:book_add' book.id %}" method="post">
+                {% csrf_token %}
+                {{item.quantity_form.quantity}}
+                {{item.quantity_form.is_update}}
+                <input type="submit" value ="Update">
+            </form>
 
-        <a href = "{% url 'cart:book_remove' book.id %}"> Remove </a>
-        <p>price: $ {{item.price}}</p>
-        <p>total_price : $ {{item.total_price}}</p><hr>
+            
+            <p>price: $ {{item.price}}</p>
+            <p>total_price : $ {{item.total_price}}</p><hr>
 
-    {% endwith %}
-{%endfor%}
+        {% endwith %}
+        
+    {%endfor%}
+   
+    <p>Total</p>
+    <p> {{cart.get_book_total}}원</p>
 
-<p>Total</p>
-<p> {{cart.get_book_total}}원</p>
-
-<p><a href = '{% url "store:index" %}'>Continue shopping</a></p>
-
+    <p><a href = '{% url "store:index" %}'>계속 쇼핑하기</a></p>
+</div>
 {% endblock %}
