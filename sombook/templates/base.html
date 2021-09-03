@@ -77,8 +77,8 @@
   {% load static %}
   <nav>
     <div class="container-menu">
-      <a class="menu-item store" href="{%url 'store:index' %}">store</a>
-      <a class="menu-item community" href="{%url 'home' %}">community</a>
+      <a class="menu-item store" href="{%url 'store:index' %}">Store</a>
+      <a class="menu-item community" href="{%url 'home' %}">Community</a>
       <span class="navbar-text sombook-title">솜책방</span>
       {% if user.is_authenticated %}
       <a class="menu-item write" href="{%url 'community:community_new'%}">Write</a>
@@ -91,7 +91,7 @@
 
       {% if not user.is_authenticated %}
       <a class="menu-item login" href="{%url 'user:login' %}">Login</a>
-      <a class="menu-item signup" href="{%url 'user:signup' %}">Signup </a>
+      <a class="menu-item signup" href="{%url 'user:signup' %}">SignUp </a>
       {% endif %}
       
     </div>

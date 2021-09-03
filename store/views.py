@@ -25,8 +25,6 @@ def store(request):
 
 def detail(request, id,book_slug=None):
     book = get_object_or_404(Book,id=id,slug=book_slug)
-    print(book_slug)
-    print("---------------")
     add_to_cart = AddBookForm(initial={'quantity':1})
     return render(request, 'bookdetail.html',{'book':book,'add_to_cart':add_to_cart})
 

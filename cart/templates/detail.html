@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 {% for item in cart %}
     {% with book=item.book %}
     <p>{{book.title}}</p>
@@ -19,3 +21,5 @@
 <p> {{cart.get_book_total}}원</p>
 
 <p><a href = '{% url "store:index" %}'>Continue shopping</a></p>
+
+{% endblock %}
