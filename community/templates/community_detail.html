@@ -1,20 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<body>
+<style>
+    .click_button {
+        background-color: beige;
+        padding: 3px 20px 3px 20px;
+        border-radius: 10px;
+        color: black;
+    }
+    .click_button a {
+        color: black;
+        text-decoration: none;
+    }
+</style>
+
 <div class="container">
     <h1>{{data.title}}</h1>
-    
+
     <div>
-        작성자:{{data.author}}
+        작성자 : {{data.author}}
         <br>
-        날짜:{{data.date}}
+        작성일 : {{data.date}}
     </div>
     
     <hr>
     
     {% if data.image %}
-        <p><img src="{{data.image.url}}" height="500"></p>
+        <p><img src="{{data.image.url}}" height="250" length="250"></p>
     {% endif %}
     
     <p>{{data.contents | linebreaks}}</p>
@@ -22,21 +34,21 @@
     {% comment %} 밑에는 태그 관련 코드 {% endcomment %}
     <br>
     <div>
-        <b>관련 태그</b> <i class="fas fa-tag"></i>
+        <b>관련 태그</b><i class="fa fa-tag" aria-hidden="true"></i>
         {% load taggit_templatetags2_tags %} <!--taggit_templatetags2_tags 모듈을 가져온다-->
         {% get_tags_for_object data as "tags" %} <!-- ** -->
         {% for tag in tags %}
         <a href="{% url 'community:tagged_object_list' tag.name %}">{{tag.name}}</a>
         {% endfor %}
         &emsp;
-        <a href="{% url 'community:tag_cloud' %}"><span class="btn btn-info btn-sm">TagCloud</span></a>
+        <a href="{% url 'community:tag_cloud' %}"><span class="btn btn-warning btn-sm">태그 모아보기</span></a>
     </div>
     {% comment %} 태그 관련 코드 끝 {% endcomment %}
     <br>
     {% if request.user == data.author %}
     <div>
-        <a href="{% url 'community:community_edit' data.id %}"><span style="color:rgb(119, 119, 119);">▶Edit </span></a>
-        <a href="{% url 'community:community_delete' data.id %}"><span style="color:rgb(119, 119, 119);">▶Delete</span></a> 
+        <a href="{% url 'community:community_edit' data.id %}"><span class="click_button">▶Edit </span></a>
+        <a href="{% url 'community:community_delete' data.id %}"><span class="click_button">▶Delete</span></a> 
     </div>
     {% endif %}
 </div>

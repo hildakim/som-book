@@ -3,16 +3,18 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-{% if request.user == community.author %}
-    <h1>글 수정</h1>
-    <form method="POST" id="update_form" enctype="multipart/form-data">
-        {%csrf_token%}
-        {{edit_community | crispy}}
-        <button id="submit_btn" type="submit">확인</button>
-    </form>
-{% else %}
+<div class="container">
+    {% if request.user == community.author %}
+        <h1>글 수정</h1>
+        <form method="POST" id="update_form" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{edit_community | crispy}}
+            <button id="submit_btn" type="submit">확인</button>
+        </form>
+    {% else %}
 
-<h3>옳지 않은 경로입니다.</h3>
-{% endif %}
+    <h3>옳지 않은 경로입니다.</h3>
+    {% endif %}
+</div>
 
 {% endblock %}
