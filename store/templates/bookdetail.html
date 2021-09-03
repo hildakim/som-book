@@ -22,14 +22,19 @@
     <div class="div_img"><img src="{{book.image}}"></div>
     {%endif%}
     <div class="div_info">
-        <a href="{%url 'store:detail' book.id %}">{{book.title}}</a>
+         <p>{{book.title}}</p>
         <hr>
         <p>ISBN | {{book.isbn}}</p>
         <p>{{book.author}} | {{book.publisher}} | {{book.pubdate}}</p>
         <p>판매가 {{book.price}} 원</p>
         <p>{{book.description}}</p>
         <br>
-        <a href="" class="btn_cart">카트에 넣기</a>
+          <!--<a href="" class="btn_cart">카트에 넣기</a>-->
+          <form action="{% url 'cart:book_add' book.id %}" method="post">
+            {{add_to_cart}}
+            {% csrf_token %}
+            <input type="submit" value="Add to Cart">
+        </form>
     </div>
 </div>
 

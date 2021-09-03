@@ -5,5 +5,8 @@ from .views import *
 app_name = "cart"
 
 urlpatterns = [
+    path('',detail,name='detail'),
+    path('add/<int:book_id>/',add,name='book_add'),
+    path('remove/<book_id>/',remove,name='book_remove')
 
 ]
