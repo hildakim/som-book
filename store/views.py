@@ -58,13 +58,13 @@ def bookListApi(keyword, page):
 
         bookList = []
         for item in items:
-            title = item.find('title').text.replace('<b>', "").replace('</b>', "")
+            title = item.find('title').text.replace('<b>', "").replace('</b>', "").replace('!', "").replace(' / ', "").replace('/', "").replace('.', "")
             author = item.find('author').text.replace('<b>', "").replace('</b>', "")
             #slug = slugify(title)
-            slug = item.find('title').text.replace('<b>', "").replace('</b>', "").replace(' ', "-")
-            print(title)
-            print("-------------------")
-            print(slug)
+            slug = title.replace(' ', "-")
+            #print(title)
+            #print("-------------------")
+            #print(slug)
             isbn = item.find('isbn').text
             image = item.find('image').text
             publisher = item.find('publisher').text.replace('<b>', "").replace('</b>', "")
