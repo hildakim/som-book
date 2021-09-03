@@ -3,9 +3,9 @@ from django.db.models.fields import CharField, DateField, IntegerField, TextFiel
 from django.urls import reverse
 # Create your models here.
 class Book(models.Model):
-    title = CharField(max_length=70)
+    title = CharField(max_length=300)
     author = CharField(max_length=50)
-    slug = models.SlugField(max_length=200,unique=True,allow_unicode=True)
+    slug = models.SlugField(max_length=300,unique=True,allow_unicode=True)
     image = TextField()
     isbn = CharField(max_length=50, unique=True)
     price = IntegerField()
