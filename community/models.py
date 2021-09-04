@@ -38,6 +38,7 @@ class Community(models.Model):
 
 class Bookmark(models.Model):
     postId = models.ForeignKey("Community",on_delete=models.CASCADE,db_column="postId")
+    userId=models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False)
     
     def __str__(self):
         return self.postId
