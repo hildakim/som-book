@@ -95,7 +95,6 @@ def addBookmark(request, postId):
 
 
 def bookmark(request):
-    userinfo =get_user_model().objects.filter( id = request.user.id)
     post=Community.objects.all().order_by('-id')
     bookmark=Bookmark.objects.filter(userId = request.user).order_by('-id')
-    return render(request,'bookmark.html',{'userinfo':userinfo,'posts':post,'bookmark':bookmark})
+    return render(request,'bookmark.html',{'posts':post,'bookmark':bookmark})
