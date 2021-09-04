@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import RegisterForm
-#  Create your views here.
+from django.contrib.auth import get_user_model
+from community.models import *
 
 def login_view(request):
     if request.method == 'POST':
@@ -33,3 +34,5 @@ def register_view(request):
     else:
        form = RegisterForm()
        return render(request, 'signup.html', {'form' : form})
+
+
