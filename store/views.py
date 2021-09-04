@@ -17,9 +17,9 @@ def store(request):
 
     keyword = request.GET.get('keyword')
     if keyword is None or keyword == 'None' or keyword == "":
-        bookList = bookListApi(str("다"), str(page))
+        bookList = bookListApi("a", page)
     else:
-        bookList = bookListApi(str(keyword), str(page))
+        bookList = bookListApi(keyword, page)
     return render(request, 'store.html', {'bookList':bookList, 'keyword':keyword, 'page':page})
 
 
