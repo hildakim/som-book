@@ -8,9 +8,10 @@
         border-radius: 10px;
         color: black;
     }
-    .click_button a {
+    .div_btn a {
         color: black;
         text-decoration: none;
+        margin: 5px;
     }
 </style>
 
@@ -46,7 +47,7 @@
     {% comment %} 태그 관련 코드 끝 {% endcomment %}
     <br>
     {% if request.user == data.author %}
-    <div>
+    <div class="div_btn">
         <a href="{% url 'community:community_edit' data.id %}"><span class="click_button">▶Edit </span></a>
         <a href="{% url 'community:community_delete' data.id %}"><span class="click_button">▶Delete</span></a> 
     </div>
