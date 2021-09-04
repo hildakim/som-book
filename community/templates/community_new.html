@@ -2,7 +2,17 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-
+<style>
+    .another{
+        text-align:center;
+    }
+    .click-btn{
+        background-color: beige;
+        padding: 3px 20px 3px 20px;
+        border-radius: 10px;
+        color: black;
+    }
+</style>
 <div class="container">    
     {% if user.is_authenticated %}
     <h1>글 작성</h1>
@@ -16,9 +26,12 @@
     </form>
 
     {% else %}
-    <h4>로그인 후 이용하세요<br>
-    <a href="{% url '' %}">로그인</a>
-    {% comment %} 로그인 url 추가해야 됨 {% endcomment %}
+    &emsp;
+    <div class="another">
+        <h4>로그인 후 이용하세요<br>
+        <a href="{% url 'user:login' %}" class="click-btn">로그인</a></div>
+    </div>
+    {% comment %} 로그인 url 추가했음 {% endcomment %}
     </h4>
     
     {% endif %}

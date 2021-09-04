@@ -3,10 +3,11 @@ from .models import *
 
 # Register your models here.
 
+@admin.register(Community)
 class CommunityAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'tag_list')
+    list_display = ('title', 'date', 'tag_list',)
     list_filter = ('date',)
-    search_fields = ('title', 'content')
+    search_fields = ('title', 'content',)
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('tags')
@@ -16,3 +17,4 @@ class CommunityAdmin(admin.ModelAdmin):
 
 admin.site.register(Community, CommunityAdmin)
 admin.site.register(Bookmark)
+

@@ -15,9 +15,9 @@
         margin-right: 5%;
     }
     cartLogo{
-        font-size: 80px;
+        font-size: 60px;
         position: relative;
-        top:30px;
+        top:20px;
         
     }
     .div_img{
@@ -35,11 +35,11 @@
         width: 50%;
     }
     th,.totalprice,.price{
-       height: 20px;
-       padding: 10px;
-       margin-top: 10px;
-       border-radius: 20px;
-       background-color: beige;
+        height: 20px;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 20px;
+        background-color: beige;
     }
     table,th,tr,td{border: 0px solid black;}
     .price{width:90px;}
@@ -54,10 +54,16 @@
     .t2{
         padding-top: 10px;
     }
+    .removeAll_btn {
+        padding: 5px;
+        color: black;
+        background-color: white;
+        border-radius: 10px;
+    }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-   function on(bid) {//alert(bid);
+    function on(bid) {//alert(bid);
     $(document).ready(function() {
         
         $('#rmBtn'+bid).attr({src: "{%static 'xIcon_v.png'%}"});
@@ -79,13 +85,15 @@
             
     });
     function deleteM(){
-         var ret = confirm("장바구니를 비우시겠습니까?");
-         return ret;
+        var ret = confirm("장바구니를 비우시겠습니까?");
+        return ret;
     }
 </script><br><br>
 <div class='cartMain'>
+
     <p><img src="{%static 'cart.png'%}" alt="cart" height="160px"><cartLogo>장바구니</cartLogo></p>
     <h6><a  href="{% url 'cart:remove_all'%}" onclick="return deleteM()">장바구니 모두 비우기<img  src="{% static 'xIcon_.png' %}" height="20px"></a></h6>
+
     <hr>
     <div class="item"><br>
     {% if not cart%}
@@ -103,21 +111,21 @@
 
 
         <table class="cart_info">
-           <tr> <th colspan="2"><a href ="{{book.get_absolute_url}}"> <p>{{book.title}}</p></a></th></tr>
-           <tr><td> </td> </tr>
+            <tr> <th colspan="2"><a href ="{{book.get_absolute_url}}"> <p>{{book.title}}</p></a></th></tr>
+            <tr><td> </td> </tr>
             <tr class="t2"><td class="price" > {{item.price}}원</td>
-                  <td>  <form action = "{% url 'cart:book_add' book.id %}" method="post">
+                    <td>  <form action = "{% url 'cart:book_add' book.id %}" method="post">
                         {% csrf_token %}
-                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {{item.quantity_form.quantity}}
                         {{item.quantity_form.is_update}}
                         <input type="submit" value ="Update">
                     </form>
                     </td></tr>
                     <tr><td>  </td> </tr>
-              <tr ><td colspan="2" class="totalprice">총 : {{item.total_price}}원</td></tr>
+            <tr ><td colspan="2" class="totalprice">총 : {{item.total_price}}원</td></tr>
                 </table>
-               
+            
         {% endwith %}
         <br>
         <hr>
