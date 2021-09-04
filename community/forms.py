@@ -4,7 +4,7 @@ from .models import Community
 class CommunityForm(forms.ModelForm):
     class Meta:
         model = Community
-        fields = ['title','contents','image','tags']
+        fields = ['title','contents','image', 'videolink', 'tags']
 
         widgets = {
             'contents': forms.Textarea(
