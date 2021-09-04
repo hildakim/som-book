@@ -19,9 +19,10 @@ from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
 from community.views import community
+from store.views import store
 
 urlpatterns = [
-    path('', community, name='home'),
+    path('', store, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('user/', include('user.urls')),
