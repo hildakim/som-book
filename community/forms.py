@@ -9,7 +9,4 @@ class CommunityForm(forms.ModelForm):
         widgets = {
             'contents': forms.Textarea(
             attrs={'placeholder': '커뮤니티 글을 작성해주세요.'}),
-            
-            'tags' : forms.TextInput(
-            attrs={'placeholder': '태그는 쉼표(,)로 구분됩니다.'}),
         }

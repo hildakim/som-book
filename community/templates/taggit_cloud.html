@@ -33,7 +33,6 @@
 
         {% load taggit_templatetags2_tags %}
         {% get_tagcloud as tags %} <!--모든 태그 추출해서 tags변수에 할당-->
-        
         {% for tag in tags %}
         <span class="tag-{{tag.weight | floatformat:0}}"> <!-- style 관련-->
             <a href="{% url 'community:tagged_object_list' tag.name %}"> {{tag.name}} ({{tag.num_times}}개의 작성된 글이 존재합니다.)</a>
