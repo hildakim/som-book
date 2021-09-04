@@ -10,17 +10,20 @@ from cart.forms import AddBookForm
 from django.template.defaultfilters import slugify
 # Create your views here.
 def store(request):
-    page = request.GET.get('page')
-    
-    if page is None:
-        page = "1"
+    return render(request, 'store2.html')
 
-    keyword = request.GET.get('keyword')
-    if keyword is None or keyword == 'None' or keyword == "":
-        bookList = bookListApi("a", page)
-    else:
-        bookList = bookListApi(keyword, page)
-    return render(request, 'store.html', {'bookList':bookList, 'keyword':keyword, 'page':page})
+# def store(request):
+#     page = request.GET.get('page')
+    
+#     if page is None:
+#         page = "1"
+
+#     keyword = request.GET.get('keyword')
+#     if keyword is None or keyword == 'None' or keyword == "":
+#         bookList = bookListApi("a", page)
+#     else:
+#         bookList = bookListApi(keyword, page)
+#     return render(request, 'store.html', {'bookList':bookList, 'keyword':keyword, 'page':page})
 
 
 def detail(request, id,book_slug=None):
