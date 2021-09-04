@@ -1,5 +1,5 @@
 from django import forms
-from .models import Community
+from .models import *
 
 class CommunityForm(forms.ModelForm):
     class Meta:
@@ -13,3 +13,8 @@ class CommunityForm(forms.ModelForm):
             'tags' : forms.TextInput(
             attrs={'placeholder': '태그는 쉼표(,)로 구분됩니다.'}),
         }
+
+class BookmarkForm(forms.ModelForm):
+    class Meta:
+        model = Bookmark
+        fields =[]

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.core.paginator import Paginator
-from .models import Community
-from .forms import CommunityForm
+from .models import *
+from .forms import *
 from django.views.generic import ListView, DetailView,TemplateView
 
 # Create your views here.
@@ -75,3 +75,27 @@ class TaggedObjectLV(ListView):
         context = super().get_context_data(**kwargs)
         context['tagname'] = self.kwargs['tag']
         return context
+
+def deleteBookmark(request,bookmarkId):
+   deletePost = get_object_or_404(Bookmark,pk=bookmarkId)
+   deletePost.delete() #삭제해주는 메소드
+   return redirect('community:community')
+
+def addBookmark(request, postId):
+    if request.method == 'POST': #글 작성 후 저장버튼 눌렀을 때
+        book_form =  BookmarkForm(request.POST)
+        if book_form.is_valid():# 이 form을 유효한지 검사후 유효하면 save해줌 (임시저장)
+            book = book_form.save(commit = False)#임시저장 해주는 이유는 model에 있는 필드 중 new date를 안 담았음 (commit=False)
+            book.postId = Community.objects.get(pk = postId)
+            print(book.postId.id)
+            book.userId = request.user
+            print("북마트추가")
+            book.save()
+            return redirect("community:community_detail", postId)
+
+
+def bookmark(request):
+    userinfo =get_user_model().objects.filter( id = request.user.id)
+    post=Community.objects.all().order_by('-id')
+    bookmark=Bookmark.objects.filter(userId = request.user).order_by('-id')
+    return render(request,'bookmark.html',{'userinfo':userinfo,'posts':post,'bookmark':bookmark})

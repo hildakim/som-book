@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+
+{%block content%}
+   
+    {% load static %}
+    <style>
+    markLogo{
+        font-size: 80px;
+        position: relative;
+        top:30px;
+        
+    }
+    .container{
+        border: 1px solid black;
+        border-radius: 50px;
+        margin: auto;
+        text-align: center;
+        width:60%;
+        background-color: beige;
+    }
+    .myBookmark{
+        background-color: white;
+    }
+    a{text-decoration: none;}
+    a:visited{color: black;}
+    </style>
+
+   <div class="container">
+    <section>
+            <p><img src="{%static '빈북마크.png'%}" alt="bookmark" height="160px"><markLogo>북마크</markLogo></p><hr>
+            <div >
+                {% for bunit in bookmark %}
+                   
+                    {% for punit in posts %}
+                    {% if bunit.postId.id == punit.id %}
+                        <div class='myBookmark'>
+                            <br>
+                            <a class="toNext" href="{% url  'community:community_detail' punit.id%}">
+                            제목 | {{punit.title}}<br> 
+                            작성일 | {{punit.date}}<br>
+                            글 |  {{punit.summary}}<br>
+                            </a> <br> <a class="toNext" href="{% url 'community:deleteBookmark' bunit.id%}" onclick="return deletePost()">북마크에서 지우기</a><br>
+                        </div>
+                        {%endif%}
+                        
+                    {% endfor %}
+                  
+                    <hr width: 200px> {% endfor %}
+       
+        <br>
+            </div>  
+      
+    
+    </section></div>
+   
+    {%endblock%}
