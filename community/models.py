@@ -15,7 +15,7 @@ class Community(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to = "community/", blank = True, null = True)
     tags = TaggableManager(blank=True)
-    videolink = models.CharField(max_length=200,blank=True, null=True)
+    youtube_link = models.CharField(max_length=200,blank=True, null=True)
 
     class Meta:
         verbose_name = 'community' #테이블 단수 별칭

@@ -61,9 +61,9 @@
     
     <p>{{data.contents | linebreaks}}</p>
 
-    {% if data.videolink %}
+    {% if data.youtube_link %}
     <div class="video">
-        <iframe width="420" height="315" src="{{data.videolink}}" id="video_frame"></iframe>
+        <iframe width="420" height="315" src="{{data.youtube_link}}" id="video_frame"></iframe>
     </div>
     {% endif %}
 
