@@ -1,0 +1,1 @@
+web: gunicorn sombook.wsgi --log-file -
