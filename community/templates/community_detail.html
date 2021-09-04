@@ -14,7 +14,36 @@
         margin: 5px;
     }
 </style>
+<script>
+    String.prototype.replaceAt=function(index, character) {
+        return this.substr(0, index) + character + this.substr(index+1, index+character.length);
+    }
 
+    window.addEventListener('DOMContentLoaded', function(){
+        console.log('DOMContentLoaded');
+
+        var video = document.getElementById('video_frame');
+        var link = video.src;
+        console.log(link);
+        
+        // link = "https://youtu.be/e_Ru6obV2dQ"
+        link = link.replace('youtu.be', 'www.youtube.com')
+        console.log(link);
+
+        var n = link.lastIndexOf("/");
+        console.log(n);
+
+        // link = link.replace("/", "/embed/", 19);
+        console.log(link); 
+
+        link = link.replaceAt(n, '/embed/');
+        console.log(link); 
+
+        video.src = link
+        console.log(link);
+    })
+    
+</script>
 <div class="container">
     <h1>{{data.title}}</h1>
 
@@ -31,6 +60,12 @@
     {% endif %}
     
     <p>{{data.contents | linebreaks}}</p>
+
+    {% if data.youtube_link %}
+    <div class="video">
+        <iframe width="420" height="315" src="{{data.youtube_link}}" id="video_frame"></iframe>
+    </div>
+    {% endif %}
 
     {% comment %} 밑에는 태그 관련 코드 {% endcomment %}
     <br>
