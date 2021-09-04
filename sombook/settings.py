@@ -43,9 +43,9 @@ INSTALLED_APPS = [
 
     'cart.apps.CartConfig',
     'chat.apps.ChatConfig',
-    'community.apps.CommunityConfig',
     'store.apps.StoreConfig',
     'user.apps.UserConfig',
+    'community.apps.CommunityConfig',
 
     'crispy_forms',
 

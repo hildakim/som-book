@@ -15,6 +15,5 @@ class CommunityAdmin(admin.ModelAdmin):
     def tag_list(self, obj):
         return ', '.join(o.name for o in obj.tags.all())
 
-admin.site.register(Community, CommunityAdmin)
 admin.site.register(Bookmark)
 

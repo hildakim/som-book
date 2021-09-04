@@ -13,6 +13,13 @@
         text-decoration: none;
         margin: 5px;
     }
+    .bookmark_button {
+        background-color: beige;
+        border-radius: 10px;
+        border: none;
+        padding: 3px;
+        margin: 8px;
+    }
 </style>
 <script>
     String.prototype.replaceAt=function(index, character) {
@@ -87,26 +94,24 @@
         <a href="{% url 'community:community_delete' data.id %}"><span class="click_button">▶Delete</span></a> 
 
         {% if user.is_authenticated %}
-        <form method="POST"  action="{% url 'community:addBookmark' data.id%}"
-        enctype="multipart/form-data">
-        {%csrf_token%}
-        {{ bookmarkForm  }}
-       
-        <button type="submit" > 북마크추가</button>
-       
-    </form>
+        <form method="POST"  action="{% url 'community:addBookmark' data.id%}" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{ bookmarkForm  }}
+
+            <button type="submit" class="bookmark_button"> 북마크에 추가</button>
+        </form>
         {% else %}
-        <form method="POST"  action="#"
-        enctype="multipart/form-data">
-        {%csrf_token%}
-        {{ bookmarkForm  }}
-        <button type="submit" onclick="auth()"> 북마크추가</button>
-        <script>
-            function auth(){
-                 alert("로그인 하신 뒤 이용가능한 서비스 입니다");
-            }
-            </script>
-    </form>
+
+        <form method="POST"  action="#" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{ bookmarkForm  }}
+            <button type="submit" onclick="auth()"> 북마크에 추가</button>
+            <script>
+                function auth(){
+                    alert("로그인 하신 뒤 이용가능한 서비스 입니다");
+                }
+                </script>
+        </form>
         {%endif%}
     </div>
     {% endif %}

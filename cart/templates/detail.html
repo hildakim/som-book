@@ -91,8 +91,8 @@
 </script><br><br>
 <div class='cartMain'>
 
-    <p><img src="{%static 'cart.png'%}" alt="cart" height="160px"><cartLogo>장바구니</cartLogo></p>
-    <h6><a  href="{% url 'cart:remove_all'%}" onclick="return deleteM()">장바구니 모두 비우기<img  src="{% static 'xIcon_.png' %}" height="20px"></a></h6>
+    <p><img src="{%static 'cart.png'%}" alt="cart" height="90px"><cartLogo>장바구니</cartLogo></p>
+    <h6><a  href="{% url 'cart:remove_all'%}" onclick="return deleteM()" class="removeAll_btn">장바구니 모두 비우기<img  src="{% static 'xIcon_.png' %}" height="18px" style="position: relative;top:-4px;left:2px;"></a></h6>
 
     <hr>
     <div class="item"><br>

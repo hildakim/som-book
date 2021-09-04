@@ -89,7 +89,7 @@ def addBookmark(request, postId):
             book.postId = Community.objects.get(pk = postId)
             print(book.postId.id)
             book.userId = request.user
-            print("북마트추가")
+            print("북마크추가")
             book.save()
             return redirect("community:community_detail", postId)
 
